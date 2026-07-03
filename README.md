@@ -84,6 +84,7 @@ PMT
 \right)
 \]
 
+
 Where:
 
 | Variable | Description |
