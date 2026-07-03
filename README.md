@@ -1,4 +1,4 @@
-# 💰 Finora AI
+# Finora AI
 ### Cognitive Financial Auditing & Wealth Management Platform
 
 <p align="center">
