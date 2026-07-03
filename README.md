@@ -74,18 +74,6 @@ Simulates historical market movement and volatility using realistic market param
 
 Projects compound growth using:
 
-\[
-A=P\left(1+\frac r{12}\right)^{12t}
-+
-PMT
-\left(
-\frac{\left(1+\frac r{12}\right)^{12t}-1}
-{\frac r{12}}
-\right)
-\]
-
-
-Where:
 
 | Variable | Description |
 |-----------|-------------|
