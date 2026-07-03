@@ -15,7 +15,7 @@
 
 ---
 
-## 📖 Overview
+## Overview
 
 **Finora AI** is an intelligent financial management platform designed for **individuals, entrepreneurs, and startups**.
 
@@ -28,11 +28,9 @@ Unlike traditional budgeting applications, Finora AI combines:
 - Investment forecasting
 - Wealth management dashboard
 
-The application features a **retro-futuristic terminal interface** inspired by cyberpunk consoles while providing a modern responsive experience across desktop and mobile devices.
-
 ---
 
-# ✨ Features
+# Features
 
 ## Financial Dashboard
 
@@ -64,7 +62,7 @@ Each goal tracks:
 
 ---
 
-## 📈 Investment Simulator
+## Investment Simulator
 
 Interactive investment calculator with two analytical modes.
 
@@ -105,7 +103,7 @@ Supported investment horizons:
 
 ---
 
-## 🏦 Loan Comparison Engine
+## Loan Comparison Engine
 
 Compare **18 loan offers** from Moldova's largest banks.
 
@@ -135,7 +133,7 @@ Real-time calculations:
 
 ---
 
-## 🤖 AI Financial Advisor
+## AI Financial Advisor
 
 Generate personalized recommendations using AI.
 
@@ -320,7 +318,7 @@ string date
 
 ---
 
-# 📂 Project Structure
+# Project Structure
 
 ```
 finora-ai
@@ -347,7 +345,7 @@ finora-ai
 
 ---
 
-# 🚀 Installation
+# Installation
 
 ## Prerequisites
 
@@ -453,7 +451,7 @@ Authorization: Bearer <JWT_TOKEN>
 
 ---
 
-# 🔒 Security
+# Security
 
 ✔ JWT Authentication
 
@@ -501,20 +499,20 @@ Authorization: Bearer <JWT_TOKEN>
 
 ---
 
-# 📸 Screenshots
+# Screenshots
 
-> Add screenshots here
 
-```
-/docs/dashboard.png
-/docs/investments.png
-/docs/goals.png
-/docs/loans.png
-```
+<img width="1514" height="997" alt="Снимок экрана 2026-07-03 в 12 45 05" src="https://github.com/user-attachments/assets/a738ac0a-557a-4404-9a5c-ce049087e49f" />
+<img width="1527" height="996" alt="Снимок экрана 2026-07-03 в 12 42 08" src="https://github.com/user-attachments/assets/ce42e2e0-7282-4131-a6a2-8ab48b716924" />
+<img width="1522" height="997" alt="Снимок экрана 2026-07-03 в 12 43 17" src="https://github.com/user-attachments/assets/14378375-7964-402d-8e0d-6b538979e0cb" />
+<img width="1522" height="1002" alt="Снимок экрана 2026-07-03 в 12 44 38" src="https://github.com/user-attachments/assets/d1747530-4ec3-4f22-a369-0121686cfcf0" />
+<img width="1511" height="990" alt="Снимок экрана 2026-07-03 в 12 44 01" src="https://github.com/user-attachments/assets/10c9a9d2-9190-4ba8-bbcd-b39bca505f1c" />
+
 
 ---
 
-# 📄 License
+
+License
 
 This project was developed as part of the **Finora AI Financial Intelligence Platform**.
 
