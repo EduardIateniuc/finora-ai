@@ -1,81 +1,521 @@
-# Finora AI — Cognitive Financial Auditing & Wealth Management
+# 💰 Finora AI
+### Cognitive Financial Auditing & Wealth Management Platform
 
-Finora AI — это высокотехнологичная аналитическая финансовая панель, спроектированная в эстетике ретро-футуристического терминала (cyberpunk console) и предназначенная для автоматизации финансового учета, контроля личных бюджетов, умного планирования целей и симуляции долгосрочных инвестиций. 
+<p align="center">
 
-Платформа решает проблему хаотичного ведения бюджетов, предоставляя пользователю ИИ-ассистента, интерактивный кредитный симулятор, матрицу глобальных инвестиций с динамическими SVG-графиками (прошлого и будущего состояния активов) и адаптивную логику распределения капитала.
+![Next.js](https://img.shields.io/badge/Next.js-14-black?style=for-the-badge&logo=next.js)
+![Spring Boot](https://img.shields.io/badge/Spring_Boot-3.x-6DB33F?style=for-the-badge&logo=springboot)
+![PostgreSQL](https://img.shields.io/badge/PostgreSQL-16-4169E1?style=for-the-badge&logo=postgresql)
+![Supabase](https://img.shields.io/badge/Supabase-Backend-3ECF8E?style=for-the-badge&logo=supabase)
+![TailwindCSS](https://img.shields.io/badge/TailwindCSS-3.x-06B6D4?style=for-the-badge&logo=tailwindcss)
+![DeepSeek](https://img.shields.io/badge/DeepSeek-Chat-blue?style=for-the-badge)
+![Gemini](https://img.shields.io/badge/Gemini-Flash-4285F4?style=for-the-badge&logo=google)
 
----
-
-## 🛠 Технологический Стек
-
-Проект построен на базе распределенной decoupled-архитектуры:
-
-### Frontend (Клиентская часть)
-*   **Фреймворк:** Next.js (App Router, React) с полной статической и динамической генерацией страниц.
-*   **Язык программирования:** TypeScript / JavaScript.
-*   **Стилизация и интерфейс:** Tailwind CSS (темная неоновая палитра, адаптивная сетка, кастомные терминальные скроллбары).
-*   **Анимации:** Framer Motion (плавные переходы модальных окон, анимации табов и графиков).
-*   **Инструменты построения графиков:** Интерактивные кастомные SVG-координатные сетки (без раздувания бандла тяжелыми внешними библиотеками Canvas/Chart.js).
-*   **Связь с API:** Axios с перехватчиками токенов авторизации.
-
-### Backend (Серверная часть)
-*   **Фреймворк:** Spring Boot (Java), JPA / Hibernate для ORM-маппинга.
-*   **Безопасность:** Spring Security + JWT (JSON Web Tokens) с бесшовной валидацией сессий.
-*   **База данных:** PostgreSQL (развернутая на облачной инфраструктуре Supabase) с настроенными политиками безопасности на уровне строк (RLS — Row Level Security).
-
-### AI Интеграции & API
-*   **ИИ-модели:** DeepSeek Chat / Llama-3 / Gemini Flash через шлюзы OpenRouter и Groq API.
-*   **Задачи ИИ:** Автоматическая категоризация банковских транзакций по текстовому описанию, кредитный аудит, оценка инвестиционных рисков, расчет макроэкономических показателей.
+</p>
 
 ---
 
-## 💡 Тонкости реализации и ключевые особенности
+## 📖 Overview
 
-Проект содержит ряд нетривиальных инженерных решений, которые выделяют его из стандартных систем учета расходов:
+**Finora AI** is an intelligent financial management platform designed for **individuals, entrepreneurs, and startups**.
 
-### 1. Архитектура "Multi-Source Goal Deduction" (Многоканальное списание накоплений)
-При пополнении любой финансовой цели (`Goal`) платформа не просто увеличивает прогресс-бар, а запускает интерактивный сценарий выбора источника средств:
-*   **Списание из общих накоплений:** Фронтенд выполняет `PUT`-запрос на обновление профиля (`/api/users/profile`), корректируя базовый резерв `baseSavings` в БД.
-*   **Регистрация расхода:** Система создает новую транзакцию списания (`typeOfTransaction: "outcome"`) через `POST` на эндпоинт `/api/users/details/transactions`. Это автоматически увеличивает итоговые траты периода (`finalExpenses`) и обновляет метрику эффективности бюджета `efficiencyRate`.
+Unlike traditional budgeting applications, Finora AI combines:
 
-### 2. Двухрежимные интерактивные SVG-графики (Вкладки Past vs. Future)
-В модуле глобальных инвестиций при выборе любого инструмента ИИ генерирует прогнозные показатели доходности. Внутри модального окна встроены две независимые вкладки визуализации:
-*   **Вкладка «Прошлые показатели» (Past Performance):** Моделирует симуляцию исторической волатильности и роста цены актива на выбранном временном отрезке (на основе исторических паттернов), показывая, как менялась стоимость инструмента в прошлом.
-*   **Вкладка «Прогноз на будущее» (Future Projection):** Применяет формулу ежемесячно начисляемого сложного процента:
-    $$Balance_t = Balance_0 \times (1 + \frac{r}{12})^{12t} + PMT \times \frac{(1 + \frac{r}{12})^{12t} - 1}{\frac{r}{12}}$$
-    где $r$ — годовая ставка доходности, а $PMT$ — настраиваемый ежемесячный взнос пользователя. График перестраивается на лету при изменении срока планирования ($1Y, 3Y, 5Y, 10Y, 20Y$).
+- AI-powered financial analysis
+- Smart budgeting & auditing
+- Credit risk simulation
+- Goal-oriented savings
+- Investment forecasting
+- Wealth management dashboard
 
-### 3. Identity Switcher & Обработка Ошибок Авторизации
-Страница верификации (`VerificationPage`) поддерживает умное переключение профилей:
-*   Приложение кэширует сигнатуры ранее авторизованных пользователей в локальном хранилище (`finora_profiles`) вместе с метаданными о профессии и бюджете.
-*   **Перехват 403 ошибки:** При получении `403 Forbidden` от бэкенда при вводе неверного пароля или логина, система точечно выводит унифицированное предупреждение *"Неверно введен ник или пароль"* как в окне быстрого входа сохраненного профиля, так и в форме ручного ввода, исключая дезориентацию пользователя.
-
-### 4. Кредитный Аудит (18 предложений от 6 банков)
-Кредитный калькулятор интегрирован с целью накопления. Если пользователю не хватает средств на покупку цели (например, дефицит равен $remainingAmount$), этот дефицит бесшовно передается через URL-параметры на страницу кредитов.
-*   ИИ-сервер генерирует матрицу из **6 крупнейших коммерческих банков Молдовы**, предлагая **по 3 разных кредитных продукта** на каждый банк (Потребительский, Экспресс-кредит, Кредитная карта).
-*   В модальном окне симулируется нагрузка: при переключении между продуктами мгновенно пересчитываются ежемесячный аннуитетный платеж, общая переплата и коэффициент долговой нагрузки (DTI — Debt-To-Income ratio) относительно дохода пользователя. Если DTI превышает 40%, система подсвечивает индикатор красным цветом, предупреждая о высоком риске кассового разрыва.
+The application features a **retro-futuristic terminal interface** inspired by cyberpunk consoles while providing a modern responsive experience across desktop and mobile devices.
 
 ---
 
-## 🗄 Структура Базы Данных (PostgreSQL / Supabase Schema)
+# ✨ Features
 
-Проект использует реляционную схему данных со следующими ключевыми сущностями:
+## Financial Dashboard
 
-1.  **User (`users`):** Хранит логин, хэшированный пароль, email и токен сессии.
-2.  **UserDetails (`user_details`):** Связь `1:1` с таблицей пользователей. Содержит базовые показатели:
-    *   `job` — сфера деятельности;
-    *   `country` — страна резидентства (по умолчанию Moldova);
-    *   `savings` — базовый стартовый резерв (`baseSavings`);
-    *   `lunaryIncome` — базовый оклад (`baseSalary`);
-    *   `lunaryOutcome` — базовые регулярные расходы (`baseExpenses`).
-3.  **Goals (`goals`):** Связь `1:N` с пользователем. Поля:
-    *   `id` — уникальный ключ;
-    *   `goalName` — название финансовой цели;
-    *   `price` — целевая сумма накопления;
-    *   `nacopleno` — текущие аккумулированные средства.
-4.  **Transactions (`transactions`):** Связь `1:N` с пользователем. Поля:
-    *   `id` — уникальный ключ;
-    *   `typeOfTransaction` — тип ("income" / "outcome");
-    *   `category` — категория расхода/дохода (например, Аренда, Кафе, Депозит);
-    *   `transactionAmount` — сумма операции;
-    *   `date` — дата проводки.
+- Income & expense analytics
+- Budget efficiency calculation
+- Monthly financial overview
+- Dynamic statistics
+- Personal finance health score
+
+---
+
+## Goal Management
+
+Create and manage financial goals.
+
+Examples:
+
+- Buy a Car
+- Apartment
+- Vacation
+- New Laptop
+
+Each goal tracks:
+
+- Target amount
+- Current savings
+- Progress
+- Estimated completion
+
+---
+
+## 📈 Investment Simulator
+
+Interactive investment calculator with two analytical modes.
+
+### Historical Performance
+
+Simulates historical market movement and volatility using realistic market parameters.
+
+### Future Growth Projection
+
+Projects compound growth using:
+
+\[
+A=P\left(1+\frac r{12}\right)^{12t}
++
+PMT
+\left(
+\frac{\left(1+\frac r{12}\right)^{12t}-1}
+{\frac r{12}}
+\right)
+\]
+
+Where:
+
+| Variable | Description |
+|-----------|-------------|
+| **P** | Initial investment |
+| **PMT** | Monthly contribution |
+| **r** | Annual expected return |
+| **t** | Investment duration |
+
+Supported investment horizons:
+
+- 1 year
+- 3 years
+- 5 years
+- 10 years
+- 20 years
+
+---
+
+## 🏦 Loan Comparison Engine
+
+Compare **18 loan offers** from Moldova's largest banks.
+
+Supported banks:
+
+- MAIB
+- MICB
+- OTP Bank
+- Victoriabank
+- FinComBank
+- BCR Chișinău
+
+Each bank includes:
+
+- Consumer Loan
+- Express Loan
+- Credit Card
+
+Real-time calculations:
+
+- Monthly payment
+- Total repayment
+- Overpayment
+- Interest rate
+- Debt-To-Income (DTI)
+- Financial risk indicator
+
+---
+
+## 🤖 AI Financial Advisor
+
+Generate personalized recommendations using AI.
+
+Examples:
+
+- Budget optimization
+- Saving strategies
+- Spending analysis
+- Investment suggestions
+- Financial planning
+
+Powered by:
+
+- DeepSeek Chat
+- Google Gemini Flash
+
+---
+
+## Authentication
+
+- JWT Authentication
+- Spring Security
+- Protected REST API
+- Secure profile switching
+- Local profile caching
+- Automatic 403 handling
+
+---
+
+# System Architecture
+
+```mermaid
+graph TD
+
+Client[Next.js Frontend]
+Gateway[Spring Boot REST API]
+Database[(PostgreSQL / Supabase)]
+AI[OpenRouter / Gemini]
+Security[RLS + JWT]
+
+Client --> Gateway
+Gateway --> Database
+Client --> AI
+Database --> Security
+```
+
+---
+
+# ⚙️ Technical Highlights
+
+## Smart Goal Deduction
+
+When contributing money toward a goal, users choose where funds originate.
+
+### Savings
+
+Updates:
+
+```
+PUT /api/users/profile
+```
+
+Reduces:
+
+```
+baseSavings
+```
+
+---
+
+### Monthly Expenses
+
+Creates transaction:
+
+```
+POST /api/users/details/transactions
+```
+
+Automatically recalculates:
+
+- Expenses
+- Budget efficiency
+- Financial statistics
+
+---
+
+## Lightweight SVG Charts
+
+Instead of using heavy charting libraries, Finora AI renders responsive SVG graphs manually.
+
+Benefits:
+
+- Faster loading
+- Smaller bundle
+- Better responsiveness
+- No external plotting dependency
+
+---
+
+## Credit Risk Analysis
+
+Every loan recalculates:
+
+- Monthly annuity
+- Total interest
+- Total repayment
+- DTI ratio
+
+If
+
+```
+DTI > 40%
+```
+
+the interface immediately displays a financial warning.
+
+---
+
+## Intelligent Error Handling
+
+The frontend intercepts authentication failures.
+
+Instead of exposing backend errors:
+
+```
+403 Forbidden
+```
+
+Users always receive:
+
+```
+Incorrect nickname or password
+```
+
+creating a consistent authentication experience.
+
+---
+
+# 🗄 Database Schema
+
+```mermaid
+erDiagram
+
+USERS ||--|| USER_DETAILS : has
+USERS ||--o{ GOALS : tracks
+USERS ||--o{ TRANSACTIONS : logs
+
+USERS{
+bigint id PK
+string username
+string email
+string password
+}
+
+USER_DETAILS{
+bigint id PK
+bigint user_id FK
+string job
+string country
+bigint baseSavings
+bigint baseSalary
+bigint baseExpenses
+}
+
+GOALS{
+bigint id PK
+bigint user_id FK
+string goalName
+bigint targetAmount
+bigint savedAmount
+}
+
+TRANSACTIONS{
+bigint id PK
+bigint user_id FK
+string transactionType
+string category
+bigint amount
+string date
+}
+```
+
+---
+
+# 📂 Project Structure
+
+```
+finora-ai
+│
+├── finora-frontend
+│   ├── app
+│   │   ├── dashboard
+│   │   ├── loans
+│   │   ├── profile
+│   │   │   ├── advices
+│   │   │   └── goal-details
+│   │   └── verification
+│   │
+│   ├── public
+│   └── package.json
+│
+└── finora-backend
+    ├── controller
+    ├── service
+    ├── repository
+    ├── model
+    └── pom.xml
+```
+
+---
+
+# 🚀 Installation
+
+## Prerequisites
+
+- Node.js 18+
+- Java 17+
+- Maven
+- PostgreSQL
+- Supabase (optional)
+
+---
+
+# Backend
+
+Clone repository
+
+```bash
+git clone https://github.com/EduardIateniuc/finora-ai.git
+cd finora-ai/finora-backend
+```
+
+Configure
+
+```properties
+spring.datasource.url=jdbc:postgresql://localhost:5432/postgres
+spring.datasource.username=postgres
+spring.datasource.password=password
+
+spring.jpa.hibernate.ddl-auto=update
+spring.jpa.show-sql=false
+```
+
+Run
+
+```bash
+mvn clean install
+mvn spring-boot:run
+```
+
+Backend:
+
+```
+http://localhost:8080
+```
+
+---
+
+# Frontend
+
+```
+cd ../finora-frontend
+```
+
+Create
+
+```
+.env.local
+```
+
+```env
+NEXT_PUBLIC_API_URL=http://localhost:8080
+
+OPENROUTER_API_KEY=your_api_key
+
+OPENROUTER_MODEL=deepseek/deepseek-chat:free
+```
+
+Install
+
+```bash
+npm install
+```
+
+Run
+
+```bash
+npm run dev
+```
+
+Open
+
+```
+http://localhost:3000
+```
+
+---
+
+# 📡 REST API
+
+Private endpoints require
+
+```
+Authorization: Bearer <JWT_TOKEN>
+```
+
+| Method | Endpoint | Description |
+|----------|-----------|------------|
+| POST | `/api/auth/login` | Login |
+| GET | `/api/users/profile` | Get profile |
+| PUT | `/api/users/profile` | Update profile |
+| POST | `/api/users/details/transactions` | Add transaction |
+| PUT | `/api/users/details/goals/{id}` | Update goal |
+| DELETE | `/api/users/details/goals/{id}` | Delete goal |
+
+---
+
+# 🔒 Security
+
+✔ JWT Authentication
+
+✔ Spring Security
+
+✔ Password Encryption
+
+✔ Protected REST Endpoints
+
+✔ Row Level Security (Supabase)
+
+✔ CORS Protection
+
+✔ Secure Local Storage
+
+---
+
+# 🛠 Tech Stack
+
+### Frontend
+
+- Next.js 14
+- React
+- Tailwind CSS
+- TypeScript
+
+### Backend
+
+- Spring Boot 3
+- Spring Security
+- JWT
+- Hibernate
+- JPA
+
+### Database
+
+- PostgreSQL
+- Supabase
+
+### AI
+
+- DeepSeek
+- Gemini Flash
+- OpenRouter
+
+---
+
+# 📸 Screenshots
+
+> Add screenshots here
+
+```
+/docs/dashboard.png
+/docs/investments.png
+/docs/goals.png
+/docs/loans.png
+```
+
+---
+
+# 📄 License
+
+This project was developed as part of the **Finora AI Financial Intelligence Platform**.
+
+© 2026 Finora AI
